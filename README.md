@@ -1,6 +1,6 @@
 # G2S3: a Sparse and Smooth Signal of Gene Graph-based imputation method for scRNA-seq data
 
-G2S3 is an imputation method that applies graph signal processing to extract gene graph structure from scRNA-seq data and recover true expression levels by borrowing information from adjacent genes in the gene graph. G2S3 was shown to be an effective tool to improve the quality of single-cell transcriptomic data. Moreover, G2S3 is computationally efficient for imputation in large-scale scRNA-seq datasets.
+G2S3 is an imputation method that applies graph signal processing to extract gene graph structure from scRNA-seq data and recover true expression levels by borrowing information from adjacent genes in the gene graph. It is computationally efficient for imputation in large-scale scRNA-seq datasets.
 
 
 ## Installation Instructions:
