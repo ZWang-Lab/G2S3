@@ -12,6 +12,7 @@ g2s3_config <- function(unlocbox.dir, gspbox.dir, g2s3.dir = "."){
     cmd.out  <- paste0(cmd.out, "init_unlocbox();\n")
     cmd.out <- paste0(cmd.out, "cd ", gspbox.dir, ";\n")
     cmd.out <- paste0(cmd.out,"gsp_start;")
+    cmd.out <- paste0(cmd.out,"cd(origPath);\n")
     cmd.out <- paste0(cmd.out, "addpath(\"", g2s3.dir, "\");\n")
     cmd.out <- paste0(cmd.out,"cd(origPath);\n")
     cmd.out <- paste0(cmd.out, "x = csvread('x.csv');\n")
