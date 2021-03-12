@@ -62,8 +62,9 @@ end
 
 % log transformation
 
+my_normc = @(m)bsxfun(@rdivide,m,sqrt(sum(m.^2)))
 
-M = normc(data);
+M = my_normc(data);
 
 function W = affinity2graph(Z)
     switch type
@@ -76,34 +77,6 @@ function W = affinity2graph(Z)
     end
 end
 
-% if nc < 1000
-    Z = gsp_distanz(M).^2;
-    W = affinity2graph(Z);
-% else
-    
-% learning large graph - use flann
-    
-%      params_NN.use_flann = 1;
-%  
-%      sub_idx = randsample(nc,1000);
-%      M_sub = M(:, sub_idx);
-%      Z_sub = gsp_distanz(M_sub).^2;
-%      W_sub = affinity2graph(Z_sub);
-%      
-%    
-%     k = 10; % average edges per node
-%     params_NN.use_flann = 1;
-%     params_NN.k = 2 * k + 1;
-%     [indx, indy, dist, ~, ~, ~, NN, Z_sorted] = gsp_nn_distanz(data, data, params_NN);
-%     Z_sp = sparse(indx, indy, dist.^2, nc, nc, params_NN.k * nc * 2);
-%     Z_sp = gsp_symmetrize(Z_sp, 'full');
-%     Z_sorted = Z_sorted(:, 2:end).^2; 
-%     theta = gsp_compute_graph_learning_theta(Z_sorted, k, 0, true);
-%     params.edge_mask = Z_sp > 0;
-%     params.fix_zeros = 1;
-%     [W, ~] = gsp_learn_graph_log_degrees(Z_sp * theta, a, b, params);
-    
-% end 
 
 switch self
   case 1
