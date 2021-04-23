@@ -62,8 +62,7 @@ end
 
 % log transformation
 
-my_normc = @(m)bsxfun(@rdivide,m,sqrt(sum(m.^2)))
-
+my_normc = @(m)bsxfun(@rdivide,m,sqrt(sum(m.^2)));
 M = my_normc(data);
 
 function W = affinity2graph(Z)
@@ -77,6 +76,8 @@ function W = affinity2graph(Z)
     end
 end
 
+Z = gsp_distanz(M).^2;
+W = affinity2graph(Z);
 
 switch self
   case 1
