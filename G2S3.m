@@ -24,7 +24,7 @@ function [data_impute, W] = G2S3(data,varargin)
 % output format: cell(row) * genes(columns) array
 
 % set up default parameters   
-a = 1; b = 1; type = 'logb';tol = 10^-4;self = 1; normalize = 1;scale = 1;
+a = 1; b = 1; type = 'logb';tol = 10^-4;self = 1; normalize = 1;scale = 1; t = 1;
 % get input parameters
 
 for i=1:length(varargin)
@@ -55,6 +55,10 @@ for i=1:length(varargin)
     if(strcmp(varargin{i}, 'scale'))
       normalize = lower(varargin{i+1});
     end
+
+    if(strcmp(varargin{i}, 't'))
+      t = lower(varargin{i+1});
+    end
   
 end
 
@@ -64,6 +68,7 @@ end
 
 my_normc = @(m)bsxfun(@rdivide,m,sqrt(sum(m.^2)));
 M = my_normc(data);
+
 
 function W = affinity2graph(Z)
     switch type
@@ -76,9 +81,11 @@ function W = affinity2graph(Z)
     end
 end
 
-Z = gsp_distanz(M).^2;
-W = affinity2graph(Z);
 
+  Z = gsp_distanz(M).^2;
+  W = affinity2graph(Z);
+
+    
 switch self
   case 1
     W = bsxfun(@rdivide, W, sum(W,1));
@@ -92,7 +99,7 @@ switch self
 W(W<0) = 0;
 
 W = bsxfun(@rdivide, W, sum(W,1));
-W = W^2;
+W = W^t;
 data_impute = data * W;
 
 
